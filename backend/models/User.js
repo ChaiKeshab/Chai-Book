@@ -1,6 +1,6 @@
 //eslint-disable-next-line 
 const mongoose = require('mongoose')
-const {Schema} = mongoose
+const { Schema } = mongoose
 //eslint-disable-next-line 
 const UserSchema = new Schema({
     name: {
@@ -10,7 +10,7 @@ const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
-        // unique: true
+        unique: true
     },
     password: {
         type: String,
@@ -22,5 +22,7 @@ const UserSchema = new Schema({
     },
 });
 
+const User = mongoose.model('user', UserSchema)
+User.createIndexes();
 //eslint-disable-next-line 
-module.exports = mongoose.model('user', UserSchema)
+module.exports = User;

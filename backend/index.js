@@ -1,13 +1,16 @@
 /*eslint-disable*/
 const connectToMongo = require('./db.js');
 const express = require('express')
-const { query } = require('express-validator');
 
 connectToMongo()
 const app = express()
 const port = 3000
 
-//middleware
+//                    request, response
+// app.get('/api/login', (req, res) => {
+//   res.send('lol')
+// })
+//middleware. We use "app.use" for middleware
 app.use(express.json())
 
 //routes
