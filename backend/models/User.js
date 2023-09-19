@@ -2,6 +2,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 //eslint-disable-next-line 
+
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -23,6 +24,5 @@ const UserSchema = new Schema({
 });
 
 const User = mongoose.model('user', UserSchema)
-User.createIndexes();
 //eslint-disable-next-line 
 module.exports = User;
