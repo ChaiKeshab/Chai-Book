@@ -4,11 +4,12 @@ const User = require('../models/User')
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fetchUser = require('../middleware/fetchUser')
 
-//JWT secret key
+//JWT secret key.  Move it to .env.local
 const JWT_SECRET = '@myOwnSecretString!'
 
-//Create a User using: POST "/api/auth/createuser". Doesn't require Authentication. Only validation
+// ROUTE 1: Create a User using: POST "/api/auth/createuser". Doesn't require Authentication. Only validation
 router.post('/createuser', [
     body('name', 'Name length must be greater than 2').isLength({ min: 2 }),
     body('email', 'Enter a valid email').isEmail(),
@@ -59,7 +60,7 @@ router.post('/createuser', [
 })
 
 
-//Authenticate a User using: POST "/api/auth/login". No login required
+// ROUTE 2: Authenticate a User using: POST "/api/auth/login". No login required
 router.post('/login', [
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'Passowrd cannot be black').exists(),
@@ -101,6 +102,21 @@ router.post('/login', [
 
 })
 
+
+// ROUTE 3: Get logged in User Details using: POST "/api/auth/getuser". Login required
+// we gotta send JWT token here and decode it
+//                     middleware | this part runs after fetchUser.js next() call
+router.post('/getuser', fetchUser, async (req, res) => {
+    try {
+        userId = req.user.id    //                    this means skip user password.
+        const user = await User.findById(userId).select("-password")
+        res.send(user)
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).send("Internal Server Error")
+    }
+})
 
 module.exports = router
 
