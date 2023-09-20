@@ -11,6 +11,7 @@ const JWT_SECRET = '@myOwnSecretString!'
 
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". Doesn't require Authentication. Only validation
 router.post('/createuser', [
+    //validation using express-validator
     body('name', 'Name length must be greater than 2').isLength({ min: 2 }),
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'Password must be atleast 5 characters').isLength({ min: 5 })

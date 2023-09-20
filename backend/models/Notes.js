@@ -1,8 +1,12 @@
-//eslint-disable-next-line 
 const mongoose = require('mongoose')
+const { Schema } = mongoose
 
-//eslint-disable-next-line 
 const NotesSchema = new Schema({
+    user: {
+        //like a foreign key to link user with their correct notes.
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user' //from User.js model
+    },
     title: {
         type: String,
         required: true,
