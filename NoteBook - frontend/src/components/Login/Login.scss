@@ -1,0 +1,96 @@
+.container-form {
+  display: flex;
+  place-content: center;
+
+  .container-main {
+    display: flex;
+    width: fit-content;
+    margin-top: 50px;
+
+    .col-1 {
+      width: 320px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      place-items: center;
+      border-radius: 5px;
+      box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+      padding: 10px;
+
+      img{
+        width: 320px;
+        object-fit: cover;
+      }
+    }
+
+    .col-2 {
+      padding: 10px;
+      width: fit-content;
+      height: 406px;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        place-items: flex-end;
+
+        .submit {
+          width: 80px;
+          height: 35px;
+          border-radius: 5px;
+          cursor: pointer;
+          // user-select: none;
+
+          &:hover {
+            box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+          }
+        }
+
+        //An input field must exist inside this element to use "foucs-within" and activates on focusing on that input
+        //Search "focus-within" for more info
+        .input-field:focus-within {
+          box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+          border: 1px solid rgba(0, 0, 0, 0.9);
+        }
+
+        .input-field {
+          margin: 10px 0;
+          width: 320px;
+          padding: 5px;
+
+          display: flex;
+          flex-direction: column;
+          place-items: center;
+
+          border-radius: 5px;
+          border: 1px solid rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+
+          p {
+            display: flex;
+            margin: 0;
+            color: rgb(148, 0, 0);
+            font-size: 13px;
+          }
+
+          label {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: fit-content;
+            padding: 2px 5px 2px 25px;
+            font-size: 16px;
+          }
+
+          input {
+            width: 300px;
+            padding: 1px 5px 0px 5px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}

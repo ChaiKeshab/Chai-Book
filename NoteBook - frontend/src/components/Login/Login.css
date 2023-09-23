@@ -1,0 +1,83 @@
+.container-form {
+  display: flex;
+  place-content: center;
+}
+.container-form .container-main {
+  display: flex;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 50px;
+}
+.container-form .container-main .col-1 {
+  width: 320px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+.container-form .container-main .col-1 img {
+  width: 320px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.container-form .container-main .col-2 {
+  padding: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 406px;
+}
+.container-form .container-main .col-2 form {
+  display: flex;
+  flex-direction: column;
+  place-items: flex-end;
+}
+.container-form .container-main .col-2 form .submit {
+  width: 80px;
+  height: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.container-form .container-main .col-2 form .submit:hover {
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+.container-form .container-main .col-2 form .input-field:focus-within {
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.9);
+}
+.container-form .container-main .col-2 form .input-field {
+  margin: 10px 0;
+  width: 320px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+.container-form .container-main .col-2 form .input-field p {
+  display: flex;
+  margin: 0;
+  color: rgb(148, 0, 0);
+  font-size: 13px;
+}
+.container-form .container-main .col-2 form .input-field label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 2px 5px 2px 25px;
+  font-size: 16px;
+}
+.container-form .container-main .col-2 form .input-field input {
+  width: 300px;
+  padding: 1px 5px 0px 5px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}/*# sourceMappingURL=Login.css.map */
