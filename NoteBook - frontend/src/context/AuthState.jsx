@@ -37,6 +37,7 @@ const AuthState = (props) => {
         } catch (error) {
             console.error(error)
             alert("Invalid credentials");
+            console.error(error.response.data)
         }
     }
 
@@ -69,6 +70,7 @@ const AuthState = (props) => {
 
         } catch (error) {
             console.error(error)
+            console.error(error.response.data)
         }
     }
 

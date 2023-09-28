@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import menu from '../assets/Images/menu.svg';
 import exit from '../assets/Images/exit.svg';
 import moon from '../assets/Images/moon.svg';
@@ -13,7 +13,7 @@ export default function Navbar() {
   // useEffect(() => {
   //   console.log(location)
   // }, [location])
-
+  const navigate = useNavigate();
 
   const [mode, setMode] = useState(true)
   const [theme, setTheme] = useState('darkMode')
@@ -44,6 +44,11 @@ export default function Navbar() {
     }
   }
 
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    navigate('/login')
+  }
+
   const closeMenu = () => {
     setHamBar(false);
   }
@@ -65,6 +70,7 @@ export default function Navbar() {
               <li><Link to="/" onClick={closeMenu} className={`${hamBar ? 'hide' : 'show'}`}>Home</Link></li>
               <li><Link to="/about" onClick={closeMenu} className={`${hamBar ? 'hide' : 'show'}`}>About</Link></li>
               {/* <li><Link to="/admission" onClick={closeMenu} className={`${hamBar ? 'hide' : 'show'}`}>Admission</Link></li> */}
+              <button className={`${hamBar ? 'hide' : 'show'}`} onClick={handleLogOut}>Log out</button>
             </ul>
 
             {/* <div className='line-break'>
