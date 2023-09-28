@@ -4,7 +4,7 @@ import menu from '../assets/Images/menu.svg';
 import exit from '../assets/Images/exit.svg';
 import moon from '../assets/Images/moon.svg';
 import sun from '../assets/Images/sun.svg';
-import ellipsis from '../assets/Images/ellipsis.svg';
+// import ellipsis from '../assets/Images/ellipsis.svg';
 import './Navbar.css'
 
 export default function Navbar() {
@@ -64,7 +64,7 @@ export default function Navbar() {
             <ul className={`nav-one`}>
               <li><Link to="/" onClick={closeMenu} className={`${hamBar ? 'hide' : 'show'}`}>Home</Link></li>
               <li><Link to="/about" onClick={closeMenu} className={`${hamBar ? 'hide' : 'show'}`}>About</Link></li>
-              <li><Link to="/admission" onClick={closeMenu} className={`${hamBar ? 'hide' : 'show'}`}>Admission</Link></li>
+              {/* <li><Link to="/admission" onClick={closeMenu} className={`${hamBar ? 'hide' : 'show'}`}>Admission</Link></li> */}
             </ul>
 
             {/* <div className='line-break'>
@@ -90,9 +90,10 @@ export default function Navbar() {
             </ul> */}
           </div>
 
-          <div className='ellipsis-container'>
+          {/* <div className='ellipsis-container'>
             <img className={`ellipsis ${hamBar ? 'hide' : 'show'}`} src={ellipsis} alt="Open Navigation" onClick={toggleHambar} />
-          </div>
+          </div> */}
+
 
           <div className='sun-moon'>
             <img className={`sun ${mode ? 'show' : 'hide'}`} onClick={toggleMode} src={sun} alt="Dark Mode" />

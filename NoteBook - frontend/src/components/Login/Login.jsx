@@ -1,41 +1,47 @@
-// import React from 'react'
+import { useContext, useState } from 'react'
+import { authContext } from "../../context/appContext"
+
 import { useFormik } from 'formik'
-import './Login.css'
-import { signUpSchema } from '../../schemas'
+import { logInSchema } from '../../schemas'
+
+import SignupModal from './SignupModal'
 import BallCat from '../../assets/Images/BallCat.jpg'
+import './Login.css'
+
+
 
 //Datas that need to be pass to backend
 const initialValues = {
     //use "name" of input fields
-    username: "",
     email: "",
-    password: "",
-    confirmPass: "",
+    password: ""
 }
 
 export default function Form() {
+    const [modal, setModal] = useState(false)
+
+    const authContextData = useContext(authContext)
+    const { handleLogin } = authContextData
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
-        validationSchema: signUpSchema, //validate all data
+        validationSchema: logInSchema, //validate all data
         onSubmit: (val, action) => {
-            console.log(val)    
+            console.log(val)
+            handleLogin(val.email, val.password)
             action.resetForm()  //reset form after successful submit
         }
     })
-    // console.log(errors)
 
-    // const ObjExample = useFormik({       //To view the structure of the Formik object in console
-    //     initialValues: initialValues,
-    //     validationSchema: signUpSchema,
-    //     onSubmit: (values) => {
-    //         console.log(values)
-    //     }
-    // })
-    // console.log(ObjExample)
+    const handleModal = (e) => {
+        e.preventDefault()
+        if (modal === false) setModal(true)
+        else if (modal === true) setModal(false)
+    }
 
     return (
         <div className='container-form'>
+
             <div className='container-main'>
                 <div className='col-1'>
                     <h1>Welcome Bitches!</h1>
@@ -47,23 +53,9 @@ export default function Form() {
                     <form action="" onSubmit={handleSubmit}>
 
                         <div className='input-field'>
-                            <label htmlFor="username">Username</label>
-                            <input type="text"
-                                autoComplete='off'
-                                placeholder='Username'
-                                id='username'
-                                name='username'
-                                value={values.username} //use "name"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                            {touched.username && errors.username ? <p>{errors.username}</p> : null}
-                        </div>
-
-                        <div className='input-field'>
                             <label htmlFor="email">Email</label>
                             <input type="email"
-                                autoComplete='off'
+                                autoComplete='email'
                                 placeholder='Email'
                                 id='email'
                                 name='email'
@@ -77,7 +69,7 @@ export default function Form() {
                         <div className='input-field'>
                             <label htmlFor="password">Password</label>
                             <input type="password"
-                                autoComplete='off'
+                                autoComplete='current-password'
                                 placeholder='Password'
                                 id='password'
                                 name='password'
@@ -86,27 +78,14 @@ export default function Form() {
                                 onBlur={handleBlur}
                             />
                             {touched.password && errors.password ? <p>{errors.password}</p> : null}
-
-                        </div>
-
-                        <div className='input-field'>
-                            <label htmlFor="confirmPass">Confirm Password</label>
-                            <input type="password"
-                                autoComplete='off'
-                                placeholder='Confirm Password'
-                                id='confirmPass'
-                                name='confirmPass'
-                                value={values.confirmPass}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                            {touched.confirmPass && errors.confirmPass ? <p>{errors.confirmPass}</p> : null}
                         </div>
 
                         <button className='submit' type='submit'>Submit</button>
                     </form>
+                    <button onClick={handleModal}>Create New Account</button>
                 </div>
             </div>
+            {modal && <SignupModal handleModal={handleModal} />}
         </div>
     )
 }

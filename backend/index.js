@@ -1,11 +1,12 @@
 /*eslint-disable*/
 const connectToMongo = require('./db.js');
 const express = require('express')
+var cors = require('cors')
 
 connectToMongo()
 const app = express()
 const port = 5000
-
+app.use(cors())
 //                    request, response
 // app.get('/api/login', (req, res) => {
 //   res.send('lol')
