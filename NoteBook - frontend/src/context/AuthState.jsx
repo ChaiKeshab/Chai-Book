@@ -1,12 +1,11 @@
 import { authContext } from "./appContext";
-import { useState } from "react";
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 const AuthState = (props) => {
     const navigate = useNavigate()
-    const [getAuthToken, setGetAuthToken] = useState(false)
+
 
     const handleLogin = async (email, password) => {
         try {
@@ -23,11 +22,8 @@ const AuthState = (props) => {
             }
 
             const response = await axios.post(url, data, config)
-            console.log(response.data.authToken, "login")
             if (response.data.success) {
-                setGetAuthToken(true)
-                localStorage.setItem('token', !getAuthToken);
-                // localStorage.setItem('token', response.data.getAuthToken);
+                localStorage.setItem('token', response.data.authToken);
                 navigate("/");
             }
             else {
@@ -59,9 +55,7 @@ const AuthState = (props) => {
 
             if (response.data.success) {
                 // Save the auth token and redirect
-                setGetAuthToken(true)
-                localStorage.setItem('token', !getAuthToken);
-                // localStorage.setItem('token', response.data.getAuthToken);
+                localStorage.setItem('token', response.data.authToken);
                 navigate("/");
             }
             else {
@@ -75,7 +69,7 @@ const AuthState = (props) => {
     }
 
     return (
-        <authContext.Provider value={{ handleSignup, handleLogin, getAuthToken }}>
+        <authContext.Provider value={{ handleSignup, handleLogin }}>
             {props.children}
         </authContext.Provider>
     )

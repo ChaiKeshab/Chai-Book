@@ -21,8 +21,8 @@ router.get('/fetchallnotes', fetchUser, async (req, res) => {
 
 // ROUTE 2: Add a new Note using: POST "/api/notes/addnote". Login required. Logged in means having auth-token which is send in header
 router.post('/addnote', fetchUser, [
-    body('title', 'Enter a valid title').isLength({ min: 1 }),
-    body('description', 'Enter a valid email').isLength({ min: 1 })
+    body('title', 'Min length required: 1'),
+    body('description', 'Min length required: 1').isLength({ min: 1 })
 ], async (req, res) => {
 
     try {

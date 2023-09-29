@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     const navigateLogin = () => {
-      if (localStorage.getItem('token') === "true") {
+      if (localStorage.getItem('token')) {
         setnavbar(true)
       } else {
         navigate(`/login`);

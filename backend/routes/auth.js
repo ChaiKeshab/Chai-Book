@@ -117,6 +117,7 @@ router.post('/login', [
 //                     middleware | this part runs after fetchUser.js next() call
 router.post('/getuser', fetchUser, async (req, res) => {
     try {
+        //req.user.id will be imported form fetchUser
         userId = req.user.id    //                    this means skip user password.
         const user = await User.findById(userId).select("-password")
         res.send(user)

@@ -18,6 +18,7 @@ const initialValues = {
 }
 
 export default function Form() {
+    //modal handles signup page popup
     const [modal, setModal] = useState(false)
 
     const authContextData = useContext(authContext)
@@ -35,8 +36,8 @@ export default function Form() {
 
     const handleModal = (e) => {
         e.preventDefault()
-        if (modal === false) setModal(true)
-        else if (modal === true) setModal(false)
+        if (!modal) setModal(true)
+        else if (modal) setModal(false)
     }
 
     return (
