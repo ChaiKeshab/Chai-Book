@@ -1,11 +1,7 @@
 import { noteContext } from "./appContext";
 import { useState, useCallback } from "react";
 import axios from "axios";
-import { noteContext } from "./appContext";
-import { useState, useCallback } from "react";
-import axios from "axios";
 import PropTypes from 'prop-types'
-
 
 
 const NoteState = (props) => {
@@ -92,7 +88,6 @@ const NoteState = (props) => {
 
     return (
         <noteContext.Provider value={{ handleAddNote, handleFetchAllNotes, handleUpdateNote, note }}>
-        <noteContext.Provider value={{ handleAddNote, handleFetchAllNotes, handleUpdateNote, note }}>
             {props.children}
         </noteContext.Provider>
     )
@@ -100,7 +95,6 @@ const NoteState = (props) => {
 
 NoteState.propTypes = {
     children: PropTypes.object
-};
 };
 
 export default NoteState

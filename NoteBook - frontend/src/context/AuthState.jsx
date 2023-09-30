@@ -85,25 +85,7 @@ const AuthState = (props) => {
 
                 const response = await axios.get(url, config)
                 setUserData(response.data)
-
-            } catch (error) {
-                console.error(error)
-                console.error(error.response.data)
-            }
-    }
-
-    const handleGetUserData = async (authToken) => {
-            try {
-                console.log(authToken, 'getdata')
-                const config = {
-                    headers: {
-                        'auth-token': authToken
-                    },
-                };
-                const url = `${import.meta.env.VITE_AUTH_URL}/getuser`
-
-                const response = await axios.get(url, config)
-                setUserData(response.data)
+                console.log(response.data)
 
             } catch (error) {
                 console.error(error)

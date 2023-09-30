@@ -1,10 +1,6 @@
 import { useContext, useState } from "react"
-import { useContext, useState } from "react"
 import { noteContext } from "../context/appContext"
 import Note from "./Note"
-
-import Note from "./Note"
-
 
 const Home = () => {
 
