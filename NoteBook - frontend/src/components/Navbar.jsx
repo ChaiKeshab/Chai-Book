@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import { authContext } from "../context/appContext"
 import menu from '../assets/Images/menu.svg';
 import exit from '../assets/Images/exit.svg';
 import moon from '../assets/Images/moon.svg';
@@ -13,6 +14,9 @@ export default function Navbar() {
   // useEffect(() => {
   //   console.log(location)
   // }, [location])
+  const authContextData = useContext(authContext)
+  const { userData } = authContextData
+
   const navigate = useNavigate();
 
   const [mode, setMode] = useState(true)

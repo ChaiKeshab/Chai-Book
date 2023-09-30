@@ -115,11 +115,12 @@ router.post('/login', [
 // ROUTE 3: Get logged in User Details using: POST "/api/auth/getuser". Login required
 // we gotta send JWT token here and decode it
 //                     middleware | this part runs after fetchUser.js next() call
-router.post('/getuser', fetchUser, async (req, res) => {
+router.get('/getuser', fetchUser, async (req, res) => {
     try {
-        userId = req.user.id    //                    this means skip user password.
+        //req.user.id will be imported form fetchUser
+        const userId = req.user.id    //                    this means skip user password.
         const user = await User.findById(userId).select("-password")
-        res.send(user)
+        res.json(user)
 
     } catch (error) {
         console.error(error)

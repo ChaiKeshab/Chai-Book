@@ -1,12 +1,12 @@
 import { authContext } from "./appContext";
-import { useState } from "react";
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
 
 const AuthState = (props) => {
     const navigate = useNavigate()
-    const [getAuthToken, setGetAuthToken] = useState(false)
+    const [userData, setUserData] = useState({})
 
     const handleLogin = async (email, password) => {
         try {
@@ -23,12 +23,11 @@ const AuthState = (props) => {
             }
 
             const response = await axios.post(url, data, config)
-            console.log(response.data.authToken, "login")
             if (response.data.success) {
-                setGetAuthToken(true)
-                localStorage.setItem('token', !getAuthToken);
-                // localStorage.setItem('token', response.data.getAuthToken);
+                const authToken = response.data.authToken
+                localStorage.setItem('token', authToken);
                 navigate("/");
+                handleGetUserData(authToken)
             }
             else {
                 alert("Invalid credentials");
@@ -59,10 +58,10 @@ const AuthState = (props) => {
 
             if (response.data.success) {
                 // Save the auth token and redirect
-                setGetAuthToken(true)
-                localStorage.setItem('token', !getAuthToken);
-                // localStorage.setItem('token', response.data.getAuthToken);
+                const authToken = response.data.authToken
+                localStorage.setItem('token', authToken);
                 navigate("/");
+                handleGetUserData(authToken)
             }
             else {
                 alert("Invalid credentials");
@@ -74,8 +73,27 @@ const AuthState = (props) => {
         }
     }
 
+    const handleGetUserData = async (authToken) => {
+            try {
+                console.log(authToken, 'getdata')
+                const config = {
+                    headers: {
+                        'auth-token': authToken
+                    },
+                };
+                const url = `${import.meta.env.VITE_AUTH_URL}/getuser`
+
+                const response = await axios.get(url, config)
+                setUserData(response.data)
+
+            } catch (error) {
+                console.error(error)
+                console.error(error.response.data)
+            }
+    }
+
     return (
-        <authContext.Provider value={{ handleSignup, handleLogin, getAuthToken }}>
+        <authContext.Provider value={{ handleSignup, handleLogin, userData }}>
             {props.children}
         </authContext.Provider>
     )

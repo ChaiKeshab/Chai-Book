@@ -14,8 +14,8 @@ dist-ssr
 *.env
 
 #self
-src/components/*.map
-src/components/*.css
+*.map
+notebook-frontend/src/components/*.css
 
 # Editor directories and files
 .vscode/*

@@ -21,8 +21,8 @@ router.get('/fetchallnotes', fetchUser, async (req, res) => {
 
 // ROUTE 2: Add a new Note using: POST "/api/notes/addnote". Login required. Logged in means having auth-token which is send in header
 router.post('/addnote', fetchUser, [
-    body('title', 'Enter a valid title').isLength({ min: 1 }),
-    body('description', 'Enter a valid email').isLength({ min: 1 })
+    body('title'),
+    body('description')
 ], async (req, res) => {
 
     try {
@@ -55,9 +55,14 @@ router.put('/updatenote/:id', fetchUser, [
     try {
         //Create a newNote object
         const newNote = {};
-        if (title) { newNote.title = title };
-        if (description) { newNote.description = description };
-        if (tags) { newNote.tags = tags };
+        if (title) { newNote.title = title }
+        else { newNote.title = '' }
+
+        if (description) { newNote.description = description }
+        else { newNote.description = '' }
+
+        if (tags) { newNote.tags = tags }
+        else { newNote.tags = '' }
 
         //Find the note to be updated and update it
         let note = await Note.findById(req.params.id);

@@ -1,24 +1,93 @@
-import {noteContext} from "./appContext";
-import { useState } from "react";
+import { noteContext } from "./appContext";
+import { useState, useCallback } from "react";
+import axios from "axios";
 import PropTypes from 'prop-types'
+
 
 const NoteState = (props) => {
 
-    const [first, setFirst] = useState({
-        "name": "Chai",
-        "work": "none"
-    })
+    const [note, setNote] = useState([])
 
-    const updateState = () => {
-        //In react, don't mutate the object directly. Instead, create new object with updated values
-        setFirst((prevState) => ({
-            ...prevState,
-            work: "legend"
-        }))
+    const handleAddNote = async (description, title, tags) => {
+        if (description || title || tags) {
+            try {
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': localStorage.getItem('token')
+                    },
+                };
+                const url = `${import.meta.env.VITE_NOTE_URL}/addnote`
+
+                const data = {
+                    "title": title ? title : '',
+                    "description": description ? description : '',
+                    "tags": tags
+                }
+
+                await axios.post(url, data, config)
+                // fetch note after adding note
+                handleFetchAllNotes(true)
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }
 
+
+    const handleFetchAllNotes = useCallback(async (callCheck) => {
+
+        // callCheck: false only when logout. **Note.jsx
+        if (callCheck) {
+            try {
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': localStorage.getItem('token')
+                    },
+                };
+                const url = `${import.meta.env.VITE_NOTE_URL}/fetchallnotes`
+
+                const response = await axios.get(url, config)
+                setNote(response.data)
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    }, [])
+
+    const handleUpdateNote = async (id, description, title, tags) => {
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': localStorage.getItem('token')
+                },
+            };
+            const url = `${import.meta.env.VITE_NOTE_URL}/updatenote/${id}`
+
+            const data = {
+                "title": title ? title : '',
+                "description": description ? description : '',
+                "tags": tags
+            }
+
+            await axios.put(url, data, config)
+            // fetch note after adding note
+            handleFetchAllNotes(true)
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
+
     return (
-        <noteContext.Provider value={{ first, updateState }}>
+        <noteContext.Provider value={{ handleAddNote, handleFetchAllNotes, handleUpdateNote, note }}>
             {props.children}
         </noteContext.Provider>
     )
@@ -26,6 +95,6 @@ const NoteState = (props) => {
 
 NoteState.propTypes = {
     children: PropTypes.object
-  };
+};
 
 export default NoteState
