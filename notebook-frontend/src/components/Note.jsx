@@ -11,7 +11,7 @@ const Note = () => {
     const authbool = localStorage.getItem('token') ? true : false
 
     const noteContextData = useContext(noteContext)
-    const { handleFetchAllNotes, handleUpdateNote, note } = noteContextData
+    const { handleFetchAllNotes, handleUpdateNote, handleDeleteNote, note } = noteContextData
 
     const [editNote, setEditNote] = useState({ id: '', description: '', title: '', tags: '' })
     const [EditModal, setEditModal] = useState(false)
@@ -57,6 +57,7 @@ const Note = () => {
                                 </div> : <div>Empty Note</div>
                             }
                             <button onClick={() => handleEditModal(e._id, e.description, e.title, e.tags)}>Edit</button>
+                            <button onClick={() => handleDeleteNote(e._id)}>Delete</button>
                         </div>
                     )) : <div></div>}
             </div>

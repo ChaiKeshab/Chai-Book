@@ -1,0 +1,30 @@
+Tags needs reconfigurations on how it works. 
+tags need to be array instead of string
+    - each input string will be an element of the array
+    - this allows to add multiple tags to a content
+
+// Select all notes, select specific note.
+
+- on select, a new navbar appears on top of current
+- input the selected note in an array
+- note will contain the entire info related to selected note which will be used to perform all existing functionality at once.
+- a close button on navbar clears the array and closes the navbar returnig everything to initial state.
+
+
+current idea for execution  
+- the new navbar will be the children of Note.jsx and all the functionality will be passed as props
+
+## functionality to be passed
+- delete note
+- add label // execute through edit notes. 
+    - add label on every existing notes without the selected label
+    - if every note already has the selected label, it should remove the label on re-select
+- pin notes
+
+
+______________________________________________________________________________________________________________
+New add tag method
+
+- tags are stored as strings in array. (initially array: empty)
+- option to add tag. onClick() => input-field to create tag, show all existing tags.
+- on creating new tag, add the tag to the selected note, on list, and on left nav.

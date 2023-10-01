@@ -76,7 +76,7 @@ const NoteState = (props) => {
             }
 
             await axios.put(url, data, config)
-            // fetch note after adding note
+            // fetch note after updating note
             handleFetchAllNotes(true)
 
         } catch (error) {
@@ -84,10 +84,28 @@ const NoteState = (props) => {
         }
     }
 
+    const handleDeleteNote = async (id) => {
 
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': localStorage.getItem('token')
+                },
+            };
+            const url = `${import.meta.env.VITE_NOTE_URL}/deletenote/${id}`
+
+            await axios.delete(url, config)
+            // fetch note after deleting note
+            handleFetchAllNotes(true)
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
-        <noteContext.Provider value={{ handleAddNote, handleFetchAllNotes, handleUpdateNote, note }}>
+        <noteContext.Provider value={{ handleAddNote, handleFetchAllNotes, handleUpdateNote, handleDeleteNote, note }}>
             {props.children}
         </noteContext.Provider>
     )
